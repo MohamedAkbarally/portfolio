@@ -1,25 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import NavBar from "./components/layout/NavBar";
+import Projects from "./components/layout/Projects";
+import AboutMe from "./components/layout/AboutMe";
+import Contact from "./components/layout/Contact";
+import { makeStyles } from "@material-ui/core/styles";
+
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from "react-router-dom";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    padding: theme.spacing(3),
+    marginLeft: "279px",
+    [theme.breakpoints.down("xs")]: {
+      marginLeft: "0px",
+      marginRight: "0px"
+    },
+    maxWidth: "1000pt"
+  }
+}));
 
 function App() {
+  const classes = useStyles();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <NavBar />
+        <div className={classes.root}>
+          <Switch>
+            <Route exact path="/projects" component={Projects} />
+            <Route exact path="/contact" component={AboutMe} />
+            <Route exact path="/about" component={Contact} />
+            <Redirect from="/" to="/projects" />
+          </Switch>
+        </div>
+      </div>
+    </Router>
   );
 }
 
