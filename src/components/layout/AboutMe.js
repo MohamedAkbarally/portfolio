@@ -77,7 +77,11 @@ export default function AboutMe() {
     <div>
       <Paper className={classes.card} elevation="0" variant="outlined">
         <Typography variant="h6">Email Contact Form</Typography>
-
+        <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+          <input type="text" name="name" />
+          <input type="email" name="email" />
+          <textarea name="message"></textarea>
+        </form>
         <form onSubmit={handleSubmit}>
           <p>
             <label>
