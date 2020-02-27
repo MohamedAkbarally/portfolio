@@ -78,8 +78,6 @@ export default function AboutMe() {
       <Paper className={classes.card} elevation="0" variant="outlined">
         <Typography variant="h6">Email Contact Form</Typography>
         <form onSubmit={handleSubmit}>
-          <input type="hidden" name="form-name" value="contact" />
-
           <Grid container spacing={3}>
             <Grid item xs="12" md="6">
               <FormControl fullWidth className={classes.margin}>
