@@ -77,7 +77,7 @@ export default function AboutMe() {
     <div>
       <Paper className={classes.card} elevation="0" variant="outlined">
         <Typography variant="h6">Email Contact Form</Typography>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} netlify>
           <input type="hidden" name="form-name" value="contact" />
 
           <Grid container spacing={3}>
