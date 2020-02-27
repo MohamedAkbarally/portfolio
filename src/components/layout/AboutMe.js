@@ -9,6 +9,8 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { maxWidth } from "@material-ui/system";
 import PhoneIcon from "@material-ui/icons/Phone";
+import Alert from "@material-ui/lab/Alert";
+import Snackbar from "@material-ui/core/Snackbar";
 
 const useStyles = makeStyles(theme => ({
   margin: {
@@ -40,6 +42,19 @@ const useStyles = makeStyles(theme => ({
     verticalAlign: "middle",
     marginBottom: "3px",
     marginRight: "10px"
+  },
+  Snackbar: {
+    maxWidth: "400px",
+
+    [theme.breakpoints.down("xs")]: {
+      marginLeft: "0px",
+      marginRight: "15px",
+
+      maxWidth: "100%"
+    },
+
+    float: "middle",
+    width: "100%"
   }
 }));
 
@@ -57,6 +72,17 @@ export default function AboutMe() {
     message: ""
   });
 
+  const [open, setOpen] = React.useState(false);
+  const [open2, setOpen2] = React.useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen2(false);
+    setOpen(false);
+  };
+
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value });
   };
@@ -67,8 +93,8 @@ export default function AboutMe() {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({ "form-name": "contact", ...values })
     })
-      .then(() => alert("Success!"))
-      .catch(error => alert(error));
+      .then(() => setOpen(true))
+      .catch(error => setOpen2(true));
 
     e.preventDefault();
   };
@@ -138,6 +164,44 @@ export default function AboutMe() {
           </a>
         </Typography>
       </Paper>
+      <Snackbar
+        className={classes.Snackbar}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right"
+        }}
+      >
+        <Alert
+          className={classes.Snackbar}
+          onClose={handleClose}
+          severity="success"
+          variant="filled"
+        >
+          Email Sent Successfully!
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        className={classes.Snackbar}
+        open={open2}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right"
+        }}
+      >
+        <Alert
+          className={classes.Snackbar}
+          onClose={handleClose}
+          severity="error"
+          variant="filled"
+        >
+          Error Sending Email!
+        </Alert>
+      </Snackbar>
     </div>
   );
 }
