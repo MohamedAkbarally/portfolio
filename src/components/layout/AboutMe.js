@@ -86,7 +86,7 @@ export default function AboutMe() {
                 type="text"
                 name="name"
                 value={values.name}
-                onChange={handleChange}
+                onChange={handleChange("name")}
               />
             </label>
           </p>
@@ -97,7 +97,7 @@ export default function AboutMe() {
                 type="email"
                 name="email"
                 value={values.email}
-                onChange={handleChange}
+                onChange={handleChange("email")}
               />
             </label>
           </p>
@@ -107,7 +107,7 @@ export default function AboutMe() {
               <textarea
                 name="message"
                 value={values.message}
-                onChange={handleChange}
+                onChange={handleChange("message")}
               />
             </label>
           </p>
