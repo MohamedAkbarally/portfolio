@@ -78,42 +78,6 @@ export default function AboutMe() {
       <Paper className={classes.card} elevation="0" variant="outlined">
         <Typography variant="h6">Email Contact Form</Typography>
         <form onSubmit={handleSubmit}>
-          <p>
-            <label>
-              Your Name:{" "}
-              <input
-                type="text"
-                name="name"
-                value={values.name}
-                onChange={handleChange("name")}
-              />
-            </label>
-          </p>
-          <p>
-            <label>
-              Your Email:{" "}
-              <input
-                type="email"
-                name="email"
-                value={values.email}
-                onChange={handleChange("email")}
-              />
-            </label>
-          </p>
-          <p>
-            <label>
-              Message:{" "}
-              <textarea
-                name="message"
-                value={values.message}
-                onChange={handleChange("message")}
-              />
-            </label>
-          </p>
-          <p>
-            <button type="submit">Send</button>
-          </p>
-          {/*
           <Grid container spacing={3}>
             <Grid item xs="12" md="6">
               <FormControl fullWidth className={classes.margin}>
@@ -161,7 +125,6 @@ export default function AboutMe() {
               SEND
             </Button>
           </FormControl>
-             */}
         </form>
       </Paper>
       <Paper className={classes.phoneCard} elevation="0" variant="outlined">
