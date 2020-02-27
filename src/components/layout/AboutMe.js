@@ -9,7 +9,6 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { maxWidth } from "@material-ui/system";
 import PhoneIcon from "@material-ui/icons/Phone";
-import NetlifyForm from "react-netlify-form";
 
 const useStyles = makeStyles(theme => ({
   margin: {
@@ -44,6 +43,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const encode = data => {
+  return Object.keys(data)
+    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&");
+};
+
 export default function AboutMe() {
   const classes = useStyles();
   const [values, setValues] = React.useState({
@@ -56,76 +61,73 @@ export default function AboutMe() {
     setValues({ ...values, [prop]: event.target.value });
   };
 
+  const handleSubmit = e => {
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({ "form-name": "contact", ...values })
+    })
+      .then(() => alert("Success!"))
+      .catch(error => alert(error));
+
+    e.preventDefault();
+  };
+
   return (
     <div>
       <Paper className={classes.card} elevation="0" variant="outlined">
         <Typography variant="h6">Email Contact Form</Typography>
-        <NetlifyForm name="Contact Form">
-          {({ loading, error, success }) => (
-            <div>
-              {loading && <div>Loading...</div>}
-              {error && (
-                <div>
-                  Your information was not sent. Please try again later.
-                </div>
-              )}
-              {success && <div>Thank you for contacting us!</div>}
-              {!loading && !success && (
-                <div>
-                  <Grid container spacing={3}>
-                    <Grid item xs="12" md="6">
-                      <FormControl fullWidth className={classes.margin}>
-                        <InputLabel htmlFor="standard-adornment-amount">
-                          Name
-                        </InputLabel>
-                        <Input
-                          required
-                          type="text"
-                          minlength="3"
-                          name="name"
-                          value={values.name}
-                          onChange={handleChange("name")}
-                        />
-                      </FormControl>
-                    </Grid>
-                    <Grid item xs="12" md="6">
-                      <FormControl fullWidth className={classes.margin}>
-                        <InputLabel htmlFor="standard-adornment-amount">
-                          Email Address
-                        </InputLabel>
-                        <Input
-                          required
-                          type="email"
-                          name="email"
-                          value={values.email}
-                          onChange={handleChange("email")}
-                        />
-                      </FormControl>
-                    </Grid>
-                  </Grid>
-                  <FormControl fullWidth className={classes.margin}>
-                    <InputLabel htmlFor="standard-adornment-amount">
-                      Message
-                    </InputLabel>
-                    <Input
-                      name="message"
-                      required
-                      value={values.message}
-                      multiline
-                      rows="4"
-                      onChange={handleChange("message")}
-                    />
-                  </FormControl>
-                  <FormControl fullWidth className={classes.margin}>
-                    <Button type="submit" color="primary" variant="contained">
-                      SEND
-                    </Button>
-                  </FormControl>
-                </div>
-              )}
-            </div>
-          )}
-        </NetlifyForm>
+        <form onSubmit={handleSubmit}>
+          <input type="hidden" name="form-name" value="contact" />
+
+          <Grid container spacing={3}>
+            <Grid item xs="12" md="6">
+              <FormControl fullWidth className={classes.margin}>
+                <InputLabel htmlFor="standard-adornment-amount">
+                  Name
+                </InputLabel>
+                <Input
+                  required
+                  type="text"
+                  minlength="3"
+                  name="name"
+                  value={values.name}
+                  onChange={handleChange("name")}
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs="12" md="6">
+              <FormControl fullWidth className={classes.margin}>
+                <InputLabel htmlFor="standard-adornment-amount">
+                  Email Address
+                </InputLabel>
+                <Input
+                  required
+                  type="email"
+                  name="email"
+                  value={values.email}
+                  onChange={handleChange("email")}
+                />
+              </FormControl>
+            </Grid>
+          </Grid>
+          <FormControl fullWidth className={classes.margin}>
+            <InputLabel htmlFor="standard-adornment-amount">Message</InputLabel>
+            <Input
+              name="message"
+              required
+              value={values.message}
+              multiline
+              rows="4"
+              onChange={handleChange("message")}
+            />
+          </FormControl>
+          <FormControl fullWidth className={classes.margin}>
+            <Button type="submit" color="primary" variant="contained">
+              SEND
+            </Button>
+          </FormControl>
+        </form>
       </Paper>
       <Paper className={classes.phoneCard} elevation="0" variant="outlined">
         <Typography className={classes.phoneText} variant="h6">
