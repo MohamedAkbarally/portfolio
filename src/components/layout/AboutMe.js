@@ -43,6 +43,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const encode = data => {
+  return Object.keys(data)
+    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&");
+};
+
 export default function AboutMe() {
   const classes = useStyles();
   const [values, setValues] = React.useState({
@@ -55,11 +61,23 @@ export default function AboutMe() {
     setValues({ ...values, [prop]: event.target.value });
   };
 
+  const handleSubmit = e => {
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({ "form-name": "contact", ...values })
+    })
+      .then(() => alert("Success!"))
+      .catch(error => alert(error));
+
+    e.preventDefault();
+  };
+
   return (
     <div>
       <Paper className={classes.card} elevation="0" variant="outlined">
         <Typography variant="h6">Email Contact Form</Typography>
-        <form name="contact" method="post" netlify>
+        <form onSubmit={handleSubmit}>
           <input type="hidden" name="form-name" value="contact" />
 
           <Grid container spacing={3}>
@@ -70,6 +88,7 @@ export default function AboutMe() {
                 </InputLabel>
                 <Input
                   required
+                  type="text"
                   minlength="3"
                   name="name"
                   value={values.name}
