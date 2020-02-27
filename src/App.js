@@ -37,7 +37,6 @@ function App() {
             <Route exact path="/projects" component={Projects} />
             <Route exact path="/contact" component={AboutMe} />
             <Route exact path="/about" component={Contact} />
-            <Redirect from="/" to="/projects" />
           </Switch>
         </div>
       </div>
