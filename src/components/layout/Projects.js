@@ -19,8 +19,7 @@ const projects = [
     images: [
       {
         label: "Booking a worker",
-        imgPath:
-          "https://techcrunch.com/wp-content/uploads/2018/01/giphy1.gif?w=711"
+        imgPath: "./helpscrn.png"
       },
       {
         label: "Accepting the booking",
@@ -61,40 +60,22 @@ const projects = [
     bgColor: "#d11929",
     images: [
       {
-        label: "Booking a worker",
-        imgPath:
-          "https://techcrunch.com/wp-content/uploads/2018/01/giphy1.gif?w=711"
-      },
-      {
-        label: "Accepting the booking",
-        imgPath:
-          "https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60"
-      },
-      {
-        label: "Job in progress",
-        imgPath:
-          "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250&q=80"
-      },
-      {
-        label: "Creating an account",
-        imgPath:
-          "https://images.unsplash.com/photo-1518732714860-b62714ce0c59?auto=format&fit=crop&w=400&h=250&q=60"
+        label: "Example Video",
+        imgPath: "./reddit.gif"
       }
     ],
     descriptionLong:
       "A tool created using python used to created high production video from random submission on Reddit's Ask Me Anything forum. The program makes use of the moviepy library and amazon's Polly API",
     tags: [
-      { icon: "react-original", name: "React" },
-      { icon: "mongodb-plain", name: "MongoDB" },
-      { icon: "heroku-original", name: "Heroku" },
-      { icon: "android-plain", name: "Android Studio" },
+      { icon: "python-plain", name: "Python" },
+
       { icon: "amazonwebservices-original", name: "AWS" }
     ],
     app: {
-      link: "http://www.helpme.lk",
-      helperText: "view website"
+      link: "https://github.com/MohamedAkbarally/RedditToYoutube",
+      helperText: ""
     },
-    codeLink: "http://www.github.com"
+    codeLink: "https://github.com/MohamedAkbarally/RedditToYoutube"
   }
 ];
 
