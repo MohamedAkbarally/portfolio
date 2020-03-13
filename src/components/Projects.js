@@ -2,8 +2,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import ProjectCard from "./ProjectCard";
-import HelpmeImage from "./help.png";
-import RTYImage from "./reddit.png";
+import HelpmeImage from "./Layer 6.png";
+import RTYImage from "./Layer 7.png";
 
 const useStyles = makeStyles(theme => ({
   grid: { float: "middle", textAlign: "center" }
@@ -57,7 +57,7 @@ const projects = [
     name: "RedditToYoutube",
     image: RTYImage,
     description:
-      "A tool created using python for creating high production videos from random submissions on Reddit's AMA forum. The program uses the moviepy library and amazon's Polly API",
+      "A tool created using python used to created high production video from random submission on Reddit's Ask Me Anything forum. The program makes use of the moviepy library and amazon's Polly API",
     bgColor: "#d11929",
     images: [
       {
