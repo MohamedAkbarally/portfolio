@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Paper } from "@material-ui/core";
 import { MyContext } from "../../Provider";
+import Ellipsis from "react-ellipsis-pjs";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -43,6 +44,8 @@ export default function ProjectCard(props) {
 
   const [open, setOpen] = React.useState(false);
 
+  var str = Description;
+
   const handleToggle = () => {
     setOpen(!open);
   };
@@ -65,7 +68,7 @@ export default function ProjectCard(props) {
               component="p"
               className={classes.subText}
             >
-              {Description}
+              <Ellipsis text={str} lines={3} suffix="..." />
             </Typography>
           </div>
 
