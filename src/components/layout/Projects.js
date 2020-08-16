@@ -1,92 +1,70 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
-import ProjectCard from "./ProjectCard";
-import HelpmeImage from "./help.png";
-import RTYImage from "./reddit.png";
+import ProjectCard from "../common/ProjectCard";
+import Typography from "@material-ui/core/Typography";
+import InfoCard from "../common/InfoCard";
+import { MyContext } from "../../Provider";
 
-const useStyles = makeStyles(theme => ({
-  grid: { float: "middle", textAlign: "center" }
-}));
+const styles = {
+  grid: { float: "middle", textAlign: "center" },
+  title: { textAlign: "left" },
+};
 
-const projects = [
-  {
-    name: "helpme.lk",
-    image: HelpmeImage,
-    description:
-      "An website for hiring cleaner, drivers and other daily services to your house. The application was made using react and redux on the front end, and express and node on the backend.",
-    bgColor: "#3945bb",
-    images: [
-      {
-        label: "Booking a worker",
-        imgPath: "./helpscrn.png"
-      },
-      {
-        label: "Accepting the booking",
-        imgPath:
-          "https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60"
-      },
-      {
-        label: "Job in progress",
-        imgPath:
-          "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250&q=80"
-      },
-      {
-        label: "Creating an account",
-        imgPath:
-          "https://images.unsplash.com/photo-1518732714860-b62714ce0c59?auto=format&fit=crop&w=400&h=250&q=60"
-      }
-    ],
-    descriptionLong:
-      "An website for hiring cleaner, drivers and other daily services to your house. The application was made using react and redux on the front end, and express and node on the backend.",
-    tags: [
-      { icon: "react-original", name: "React" },
-      { icon: "mongodb-plain", name: "MongoDB" },
-      { icon: "heroku-original", name: "Heroku" },
-      { icon: "android-plain", name: "Android Studio" },
-      { icon: "amazonwebservices-original", name: "AWS" }
-    ],
-    app: {
-      link: "http://www.helpme.lk",
-      helperText: "view website"
-    },
-    codeLink: "http://www.github.com"
-  },
-  {
-    name: "RedditToYoutube",
-    image: RTYImage,
-    description:
-      "A tool created using python for creating high production videos from random submissions on Reddit's AMA forum. The program uses the moviepy library and amazon's Polly API",
-    bgColor: "#d11929",
-    images: [
-      {
-        label: "Example Video",
-        imgPath: "./reddit.gif"
-      }
-    ],
-    descriptionLong:
-      "A tool created using python used to created high production video from random submission on Reddit's Ask Me Anything forum. The program makes use of the moviepy library and amazon's Polly API",
-    tags: [
-      { icon: "python-plain", name: "Python" },
-
-      { icon: "amazonwebservices-original", name: "AWS" }
-    ],
-    app: {
-      link: "https://github.com/MohamedAkbarally/RedditToYoutube",
-      helperText: ""
-    },
-    codeLink: "https://github.com/MohamedAkbarally/RedditToYoutube"
-  }
-];
-
-export default function Projects() {
-  const classes = useStyles();
-
+export default function Projects(props) {
   return (
-    <Grid container className={classes.grid} spacing={3}>
-      {projects.map(function(project, index) {
-        return <ProjectCard data={project} key={index} />;
-      })}
-    </Grid>
+    <MyContext.Consumer>
+      {(context) => (
+        <React.Fragment>
+          {context.state.card === -1 ? (
+            <React.Fragment>
+              <Typography style={styles.title} variant="h6" gutterBottom>
+                Programming
+              </Typography>
+              <Grid container style={styles.grid} spacing={3}>
+                {props.projects
+                  .filter((opt) => opt.Type == "Programming")
+                  .map((project, index) => {
+                    console.log(index);
+                    return (
+                      <ProjectCard
+                        cardClick={(val) => context.setCard(val)}
+                        data={project}
+                        hel={index}
+                        key={index}
+                      />
+                    );
+                  })}
+              </Grid>
+              <br></br>
+              <Typography style={styles.title} variant="h6" gutterBottom>
+                Miscellaneous
+              </Typography>
+
+              <Grid container style={styles.grid} spacing={3}>
+                {" "}
+                {props.projects
+                  .filter((opt) => opt.Type == "Miscellaneous")
+                  .map((project, index) => {
+                    console.log(index);
+                    return (
+                      <ProjectCard
+                        cardClick={(val) => context.setCard(val)}
+                        data={project}
+                        hel={index}
+                        key={index}
+                      />
+                    );
+                  })}
+              </Grid>
+            </React.Fragment>
+          ) : (
+            <InfoCard
+              cardClick={(val) => context.setCard(val)}
+              data={props.projects[context.state.card]}
+            />
+          )}
+        </React.Fragment>
+      )}
+    </MyContext.Consumer>
   );
 }

@@ -1,48 +1,96 @@
-import React from "react";
+import React, { Component } from "react";
 import "./App.css";
-import NavBar from "./components/layout/NavBar";
+import axios from "axios";
+import NavBar from "./components/common/NavBar";
 import Projects from "./components/layout/Projects";
 import AboutMe from "./components/layout/AboutMe";
 import Contact from "./components/layout/Contact";
-import { makeStyles } from "@material-ui/core/styles";
-
+import CV from "./components/layout/CV";
+import { withStyles } from "@material-ui/core/styles";
+import { MyProvider } from "./Provider";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect
+  Redirect,
 } from "react-router-dom";
 
-const useStyles = makeStyles(theme => ({
+const styles = (theme) => ({
   root: {
-    padding: theme.spacing(3),
+    padding: 24,
     marginLeft: "279px",
     [theme.breakpoints.down("xs")]: {
       marginLeft: "0px",
-      marginRight: "0px"
+      marginRight: "0px",
     },
-    maxWidth: "1000pt"
+  },
+});
+var isNav = true;
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { AboutMe: "", Projects: [], Credentials: [] };
   }
-}));
 
-function App() {
-  const classes = useStyles();
+  componentDidMount() {
+    axios
+      .all([
+        axios.get(`https://portfolio-progress-mohamed.herokuapp.com/about`),
+        axios.get(`https://portfolio-progress-mohamed.herokuapp.com/projects`),
+        axios.get(
+          "https://portfolio-progress-mohamed.herokuapp.com/credentials"
+        ),
+      ])
+      .then(
+        axios.spread((about_data, project_data, credentials_data) => {
+          this.setState({ AboutMe: about_data.data.Description });
+          this.setState({ Projects: project_data.data });
+          this.setState({ Credentials: credentials_data.data });
+        })
+      );
+  }
 
-  return (
-    <Router>
-      <div className="App">
-        <NavBar />
-        <div className={classes.root}>
-          <Switch>
-            <Route exact path="/projects" component={Projects} />
-            <Route exact path="/contact" component={AboutMe} />
-            <Route exact path="/about" component={Contact} />
-            <Redirect from="/" to="/projects" />
-          </Switch>
-        </div>
-      </div>
-    </Router>
-  );
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <MyProvider>
+        <Router>
+          <div className="App">
+            <NavBar isNav={true} />
+            <div className={classes.root}>
+              <Switch>
+                <Route
+                  exact
+                  path="/projects"
+                  component={() => (
+                    <Projects
+                      card={this.state.Card}
+                      toggleNav={this.toggleNav}
+                      projects={this.state.Projects}
+                    />
+                  )}
+                />
+                <Route exact path="/contact" component={Contact} />
+                <Route
+                  exact
+                  path="/cv"
+                  component={() => <CV credentials={this.state.Credentials} />}
+                />
+                <Route
+                  exact
+                  path="/about"
+                  component={() => <AboutMe text={this.state.AboutMe} />}
+                />
+                <Redirect from="/" to="/projects" />
+              </Switch>
+            </div>
+          </div>
+        </Router>
+      </MyProvider>
+    );
+  }
 }
 
-export default App;
+export default withStyles(styles)(App);
