@@ -21,19 +21,18 @@ export default function Projects(props) {
                 Programming
               </Typography>
               <Grid container style={styles.grid} spacing={3}>
-                {props.projects
-                  .filter((opt) => opt.Type == "Programming")
-                  .map((project, index) => {
-                    console.log(index);
-                    return (
-                      <ProjectCard
-                        cardClick={(val) => context.setCard(val)}
-                        data={project}
-                        hel={index}
-                        key={index}
-                      />
-                    );
-                  })}
+                {props.projects.map((project, index) => {
+                  return project.Type == "Programming" ? (
+                    <ProjectCard
+                      cardClick={(val) => context.setCard(val)}
+                      data={project}
+                      hel={index}
+                      key={index}
+                    />
+                  ) : (
+                    <React.Fragment></React.Fragment>
+                  );
+                })}
               </Grid>
               <br></br>
               <Typography style={styles.title} variant="h6" gutterBottom>
@@ -41,20 +40,18 @@ export default function Projects(props) {
               </Typography>
 
               <Grid container style={styles.grid} spacing={3}>
-                {" "}
-                {props.projects
-                  .filter((opt) => opt.Type == "Miscellaneous")
-                  .map((project, index) => {
-                    console.log(index);
-                    return (
-                      <ProjectCard
-                        cardClick={(val) => context.setCard(val)}
-                        data={project}
-                        hel={index}
-                        key={index}
-                      />
-                    );
-                  })}
+                {props.projects.map((project, index) => {
+                  return project.Type == "Miscellaneous" ? (
+                    <ProjectCard
+                      cardClick={(val) => context.setCard(val)}
+                      data={project}
+                      hel={index}
+                      key={index}
+                    />
+                  ) : (
+                    <React.Fragment></React.Fragment>
+                  );
+                })}
               </Grid>
             </React.Fragment>
           ) : (
