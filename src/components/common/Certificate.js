@@ -7,7 +7,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
-  cert: { width: 100, cursor: "pointer" },
+  cert: {
+    width: 100,
+    cursor: "pointer",
+    "&:hover": {
+      filter: "brightness(90%)",
+    },
+  },
   div: { width: 110 },
 }));
 
@@ -34,6 +40,7 @@ export default function Certificate(props) {
         src={Cert}
         alt="certificate"
         className={classes.cert}
+        style={{}}
         onClick={() => setOpen(true)}
       ></img>
       <br></br>

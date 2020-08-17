@@ -3,14 +3,16 @@ import Chip from "@material-ui/core/Chip";
 import Icon from "@material-ui/core/Icon";
 
 const devIconStyle = {
-  margin: "5px"
+  margin: "5px",
+  fontSize: "1em",
 };
 const IconStyle = {
   verticalAlign: "top",
-  fontSize: "90%"
+  fontSize: "1em",
 };
 const pret = {
-  marginTop: "2.5%"
+  margin: "auto",
+  marginLeft: 5,
 };
 export default function Chips(props) {
   var name = props.icon;

@@ -14,17 +14,21 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   image: {
-    width: "50vw",
+    marginTop: 8,
+    marginBottom: 2,
+
+    width: "100%",
   },
 
   box: {
     borderRadius: 7,
     marginTop: 4,
     marginBottom: 4,
+    margin: "auto",
   },
   box2: {
-    width: "50vw",
-    minHeight: (window.innerWidth * 0.5) / 1.76,
+    width: "100%",
+    maxWidth: 800,
   },
 }));
 
@@ -77,7 +81,7 @@ export default function Carousel(props) {
             <ArrowBackIcon className={classes.arrow} />
           </IconButton>
         </Box>
-        <Box p={1} className={classes.box2}>
+        <Box p={0} flexGrow={1} className={classes.box2}>
           <img
             onLoad={() => {
               setLoad(true);
@@ -86,7 +90,7 @@ export default function Carousel(props) {
             className={classes.image}
           ></img>
         </Box>
-        <Box p={1}>
+        <Box p={0}>
           <IconButton
             disabled={count == length}
             aria-label="delete"
