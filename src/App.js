@@ -8,12 +8,21 @@ import Contact from "./components/layout/Contact";
 import CV from "./components/layout/CV";
 import { withStyles } from "@material-ui/core/styles";
 import { MyProvider } from "./Provider";
+import axiosRetry from "axios-retry";
+
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect,
 } from "react-router-dom";
+
+axiosRetry(axios, {
+  retries: 10,
+  retryDelay: (retryCount) => {
+    return retryCount * 1000;
+  },
+});
 
 const styles = (theme) => ({
   root: {

@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Certificate from "../common/Certificate";
 import axios from "axios";
-
+import CertificateSkeleton from "../common/CertificateSkeleton";
 const useStyles = makeStyles((theme) => ({
   grid: { float: "middle", textAlign: "center" },
   title: { textAlign: "left" },
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CV(props) {
   const classes = useStyles();
 
-  return (
+  return props.credentials.length != 0 ? (
     <React.Fragment>
       <Typography className={classes.title} variant="h6" gutterBottom>
         Work Experience
@@ -66,6 +66,43 @@ export default function CV(props) {
               ></Certificate>
             </Box>
           ))}
+      </Box>
+    </React.Fragment>
+  ) : (
+    <React.Fragment>
+      <Typography className={classes.title} variant="h6" gutterBottom>
+        Work Experience
+      </Typography>
+      <Box display="flex" flexDirection="row" p={1} m={1}>
+        <Box p={1}>
+          <CertificateSkeleton></CertificateSkeleton>
+        </Box>
+        <Box p={1}>
+          <CertificateSkeleton></CertificateSkeleton>
+        </Box>
+      </Box>
+      <Typography className={classes.title} variant="h6" gutterBottom>
+        Formal Education
+      </Typography>
+      <Box display="flex" flexDirection="row" p={1} m={1}>
+        <Box p={1}>
+          <CertificateSkeleton></CertificateSkeleton>
+        </Box>
+        <Box p={1}>
+          <CertificateSkeleton></CertificateSkeleton>
+        </Box>
+      </Box>
+
+      <Typography className={classes.title} variant="h6" gutterBottom>
+        Online Course Cerficates
+      </Typography>
+      <Box display="flex" flexDirection="row" p={1} m={1}>
+        <Box p={1}>
+          <CertificateSkeleton></CertificateSkeleton>
+        </Box>
+        <Box p={1}>
+          <CertificateSkeleton></CertificateSkeleton>
+        </Box>
       </Box>
     </React.Fragment>
   );

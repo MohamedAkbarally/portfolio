@@ -4,6 +4,7 @@ import ProjectCard from "../common/ProjectCard";
 import Typography from "@material-ui/core/Typography";
 import InfoCard from "../common/InfoCard";
 import { MyContext } from "../../Provider";
+import ProjectCardSkeleton from "../common/ProjectCardSkeleton";
 
 const styles = {
   grid: { float: "middle", textAlign: "center" },
@@ -11,7 +12,7 @@ const styles = {
 };
 
 export default function Projects(props) {
-  return (
+  return props.projects.length != 0 ? (
     <MyContext.Consumer>
       {(context) => (
         <React.Fragment>
@@ -63,5 +64,24 @@ export default function Projects(props) {
         </React.Fragment>
       )}
     </MyContext.Consumer>
+  ) : (
+    <React.Fragment>
+      <Typography style={styles.title} variant="h6" gutterBottom>
+        Programming
+      </Typography>
+      <Grid container style={styles.grid} spacing={3}>
+        <ProjectCardSkeleton></ProjectCardSkeleton>
+        <ProjectCardSkeleton></ProjectCardSkeleton>
+      </Grid>
+      <br></br>
+      <Typography style={styles.title} variant="h6" gutterBottom>
+        Miscellaneous
+      </Typography>
+
+      <Grid container style={styles.grid} spacing={3}>
+        <ProjectCardSkeleton></ProjectCardSkeleton>
+        <ProjectCardSkeleton></ProjectCardSkeleton>
+      </Grid>
+    </React.Fragment>
   );
 }
