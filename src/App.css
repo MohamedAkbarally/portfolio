@@ -13,6 +13,11 @@
   }
 }
 
+.text-link {
+  color: inherit;
+  text-decoration: inherit;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

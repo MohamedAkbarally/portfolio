@@ -3,48 +3,62 @@ import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Certificate from "../common/Certificate";
-import axios from "axios";
 import CertificateSkeleton from "../common/CertificateSkeleton";
+import sanityClient from "../../client";
+
 const useStyles = makeStyles((theme) => ({
   grid: { float: "middle", textAlign: "center" },
   title: { textAlign: "left" },
 }));
 
-export default function CV(props) {
+export default function CV({ certificates, setCertificates }) {
   const classes = useStyles();
 
-  return props.credentials.length != 0 ? (
+  useEffect(() => {
+    if (certificates == null) {
+      sanityClient
+        .fetch(`*[_type == "certificate"]`)
+        .then((data) => setCertificates(data))
+        .catch(console.error);
+    }
+    return;
+  }, []);
+
+  console.log(certificates);
+
+  return certificates ? (
     <React.Fragment>
       <Typography className={classes.title} variant="h6" gutterBottom>
         Work Experience
       </Typography>
       <Box display="flex" flexDirection="row" p={1} m={1}>
-        {props.credentials
-          .filter((opt) => opt.Type == "Work")
-          .map((opt) => (
+        {certificates
+          .filter((cert) => cert.type == "work")
+          .map((cert) => (
             <Box p={1}>
               <Certificate
-                title={opt.Title}
-                desc={opt.Description}
-                buttons={opt.buttons}
+                key={cert.title}
+                title={cert.title}
+                desc={cert.description}
+                buttons={["hello"]}
                 type="Work"
               ></Certificate>
             </Box>
           ))}
       </Box>
-
       <Typography className={classes.title} variant="h6" gutterBottom>
         Formal Education
       </Typography>
       <Box display="flex" flexDirection="row" p={1} m={1}>
-        {props.credentials
-          .filter((opt) => opt.Type == "Formal")
-          .map((opt) => (
+        {certificates
+          .filter((cert) => cert.type == "formal")
+          .map((cert) => (
             <Box p={1}>
               <Certificate
-                title={opt.Title}
-                desc={opt.Description}
-                buttons={opt.buttons}
+                key={cert.title}
+                title={cert.title}
+                desc={cert.description}
+                buttons={["hello"]}
                 type="Formal"
               ></Certificate>
             </Box>
@@ -54,14 +68,15 @@ export default function CV(props) {
         Online Course Cerficates
       </Typography>
       <Box display="flex" flexDirection="row" p={1} m={1}>
-        {props.credentials
-          .filter((opt) => opt.Type == "Online")
-          .map((opt) => (
+        {certificates
+          .filter((cert) => cert.type == "online")
+          .map((cert) => (
             <Box p={1}>
               <Certificate
-                title={opt.Title}
-                desc={opt.Description}
-                buttons={opt.buttons}
+                key={cert.title}
+                title={cert.title}
+                desc={cert.description}
+                buttons={["hello"]}
                 type="Online"
               ></Certificate>
             </Box>

@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
       filter: "brightness(90%)",
     },
   },
-  div: { width: 110 },
+  div: { width: 150, display: "block" },
 }));
 
 export default function Certificate(props) {
@@ -40,7 +40,7 @@ export default function Certificate(props) {
         src={Cert}
         alt="certificate"
         className={classes.cert}
-        style={{}}
+        style={{ height: 100 }}
         onClick={() => setOpen(true)}
       ></img>
       <br></br>

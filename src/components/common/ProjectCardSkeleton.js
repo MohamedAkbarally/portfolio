@@ -11,7 +11,6 @@ const useStyles = makeStyles((theme) => ({
     Width: 345,
     borderRadius: "7px",
     position: "relative",
-    paddingBottom: "40px",
   },
   cardButton: {
     position: "absolute",
@@ -27,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "10px",
     paddingRight: "15px",
     paddingLeft: "15px",
+    height: 140,
   },
   mainText: {
     fontWeight: 600,
@@ -44,7 +44,7 @@ export default function ProjectCard(props) {
     <React.Fragment>
       <Grid item xs={12} sm={12} md={6} lg={4} xl={3}>
         <Paper className={classes.card} elevation={0} variant="outlined">
-          <Skeleton animation="wave" variant="rect" height={151} />
+          <Skeleton animation="wave" variant="rect" height={130} />
           <div className={classes.CardContent}>
             <Typography align="left" variant="h6" className={classes.mainText}>
               <Skeleton animation="wave" />
@@ -60,14 +60,6 @@ export default function ProjectCard(props) {
 
               <Skeleton animation="wave" />
             </Typography>
-          </div>
-
-          <div className={classes.cardButton}>
-            <React.Fragment>
-              <Button size="small">
-                <Skeleton animation="wave" width={100} />
-              </Button>
-            </React.Fragment>
           </div>
         </Paper>
       </Grid>

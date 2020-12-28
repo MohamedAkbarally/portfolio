@@ -71,13 +71,6 @@ export default function CustomizedDialogs(props) {
         <DialogContent dividers>
           <Typography gutterBottom>{props.desc}</Typography>
         </DialogContent>
-        <DialogActions>
-          {props.buttons.map((opt) => (
-            <Button autoFocus href={opt.Link} color="primary">
-              {opt.Display}
-            </Button>
-          ))}
-        </DialogActions>
       </Dialog>
     </div>
   );

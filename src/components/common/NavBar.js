@@ -20,7 +20,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import { withRouter } from "react-router-dom";
 import AssignmentIcon from "@material-ui/icons/Assignment";
-import { MyContext } from "../../Provider";
+import { useLocation } from "react-router-dom";
 
 const drawerWidth = 280;
 
@@ -83,7 +83,6 @@ var selectedItem = [0, 1, 0, 0];
 
 function NavBar(props) {
   const { pathname } = props.location;
-  console.log(pathname);
 
   if (pathname === "/about") {
     selectedItem = [1, 0, 0, 0];
@@ -99,7 +98,6 @@ function NavBar(props) {
   const { container } = props;
   const classes = useStyles();
   const theme = useTheme();
-  const isNav = props.isNav;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -142,7 +140,7 @@ function NavBar(props) {
 
   const mobileAppBar = (
     <div className={classes.ButtonAppBar}>
-      <AppBar color="transparent" position="static">
+      <AppBar color="transparent" elevation={0} position="static">
         <Toolbar className={classes.appBar}>
           <IconButton
             edge="start"
@@ -178,7 +176,7 @@ function NavBar(props) {
       <Divider />
       <List>
         {["About Me", "Projects", "CV", "Contact"].map((text, index) => (
-          <div>
+          <div key={index}>
             <ListItem
               button
               key={text}
@@ -194,9 +192,13 @@ function NavBar(props) {
     </div>
   );
 
+  const location = useLocation();
+  const isProject = location.pathname.includes("/project/");
+
   return (
     <div className={classes.root}>
       <CssBaseline />
+      {!isProject && mobileAppBar}
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
@@ -228,13 +230,6 @@ function NavBar(props) {
           </Drawer>
         </Hidden>
       </nav>
-      <MyContext.Consumer>
-        {(context) => (
-          <React.Fragment>
-            {context.state.card == -1 ? mobileAppBar : <React.Fragment />}
-          </React.Fragment>
-        )}
-      </MyContext.Consumer>
     </div>
   );
 }

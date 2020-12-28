@@ -144,7 +144,12 @@ export default function AboutMe() {
             />
           </FormControl>
           <FormControl fullWidth className={classes.margin}>
-            <Button type="submit" color="primary" variant="contained">
+            <Button
+              type="submit"
+              color="primary"
+              disableElevation
+              variant="contained"
+            >
               SEND
             </Button>
           </FormControl>

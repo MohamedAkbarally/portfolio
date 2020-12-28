@@ -1,18 +1,16 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { Paper } from "@material-ui/core";
-import { MyContext } from "../../Provider";
+import { Card, CardActionArea } from "@material-ui/core";
 import Ellipsis from "react-ellipsis-pjs";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   card: {
     Width: 345,
     borderRadius: "7px",
     position: "relative",
-    paddingBottom: "40px",
   },
   cardButton: {
     position: "absolute",
@@ -28,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "10px",
     paddingRight: "15px",
     paddingLeft: "15px",
+    minHeight: 130,
   },
   mainText: {
     fontWeight: 600,
@@ -38,13 +37,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ProjectCard(props) {
+export default function ProjectCard({
+  title,
+  image,
+  slug,
+  color,
+  description,
+}) {
   const classes = useStyles();
-  const { Title, Description, Color, Image } = props.data;
 
   const [open, setOpen] = React.useState(false);
-
-  var str = Description;
 
   const handleToggle = () => {
     setOpen(!open);
@@ -54,39 +56,32 @@ export default function ProjectCard(props) {
   return (
     <React.Fragment>
       <Grid item xs={12} sm={12} md={6} lg={4} xl={3}>
-        <Paper className={classes.card} elevation={0} variant="outlined">
-          <div className={classes.imageBG} style={{ background: Color }}>
-            <img src={url_full} alt={Title} width="140px"></img>
-          </div>
-          <div className={classes.CardContent}>
-            <Typography align="left" variant="h6" className={classes.mainText}>
-              {Title}
-            </Typography>
-            <Typography
-              align="left"
-              variant="subtitle2"
-              component="p"
-              className={classes.subText}
-            >
-              <Ellipsis text={str} lines={3} suffix="..." />
-            </Typography>
-          </div>
-
-          <div className={classes.cardButton}>
-            <MyContext.Consumer>
-              {(context) => (
-                <React.Fragment>
-                  <Button
-                    onClick={() => context.setCard(props.hel)}
-                    size="small"
-                  >
-                    Find out more
-                  </Button>
-                </React.Fragment>
-              )}
-            </MyContext.Consumer>
-          </div>
-        </Paper>
+        <Link className="text-link" to={"/project/" + slug}>
+          <Card className={classes.card} elevation={0} variant="outlined">
+            <CardActionArea>
+              <div className={classes.imageBG} style={{ background: color }}>
+                <img src={image} alt={title} width="130px"></img>
+              </div>
+              <div className={classes.CardContent}>
+                <Typography
+                  align="left"
+                  variant="h6"
+                  className={classes.mainText}
+                >
+                  {title}
+                </Typography>
+                <Typography
+                  align="left"
+                  variant="body1"
+                  component="p"
+                  className={classes.subText}
+                >
+                  <Ellipsis text={description} lines={3} suffix="..." />
+                </Typography>
+              </div>
+            </CardActionArea>
+          </Card>
+        </Link>
       </Grid>
     </React.Fragment>
   );
