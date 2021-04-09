@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
-import Certificate from "../common/Certificate";
-import CertificateSkeleton from "../common/CertificateSkeleton";
-import sanityClient from "../../client";
+import React, { useEffect, useState } from 'react';
+
+import Box from '@material-ui/core/Box';
+import Certificate from '../common/Certificate';
+import CertificateSkeleton from '../common/CertificateSkeleton';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import sanityClient from '../../client';
 
 const useStyles = makeStyles((theme) => ({
-  grid: { float: "middle", textAlign: "center" },
-  title: { textAlign: "left" },
+  grid: { float: 'middle', textAlign: 'center' },
+  title: { textAlign: 'left' },
 }));
 
 export default function CV({ certificates, setCertificates }) {
@@ -31,16 +32,16 @@ export default function CV({ certificates, setCertificates }) {
       <Typography className={classes.title} variant="h6" gutterBottom>
         Work Experience
       </Typography>
-      <Box display="flex" flexDirection="row" p={1} m={1}>
+      <Box display="flex" flexDirection="row" flexWrap="wrap" p={1} m={1}>
         {certificates
-          .filter((cert) => cert.type == "work")
+          .filter((cert) => cert.type == 'work')
           .map((cert) => (
             <Box p={1}>
               <Certificate
                 key={cert.title}
                 title={cert.title}
                 desc={cert.description}
-                buttons={["hello"]}
+                buttons={['hello']}
                 type="Work"
               ></Certificate>
             </Box>
@@ -49,16 +50,16 @@ export default function CV({ certificates, setCertificates }) {
       <Typography className={classes.title} variant="h6" gutterBottom>
         Formal Education
       </Typography>
-      <Box display="flex" flexDirection="row" p={1} m={1}>
+      <Box display="flex" flexDirection="row" flexWrap="wrap" p={1} m={1}>
         {certificates
-          .filter((cert) => cert.type == "formal")
+          .filter((cert) => cert.type == 'formal')
           .map((cert) => (
             <Box p={1}>
               <Certificate
                 key={cert.title}
                 title={cert.title}
                 desc={cert.description}
-                buttons={["hello"]}
+                buttons={['hello']}
                 type="Formal"
               ></Certificate>
             </Box>
@@ -67,16 +68,16 @@ export default function CV({ certificates, setCertificates }) {
       <Typography className={classes.title} variant="h6" gutterBottom>
         Online Course Cerficates
       </Typography>
-      <Box display="flex" flexDirection="row" p={1} m={1}>
+      <Box display="flex" flexDirection="row" flexWrap="wrap" p={1} m={1}>
         {certificates
-          .filter((cert) => cert.type == "online")
+          .filter((cert) => cert.type == 'online')
           .map((cert) => (
             <Box p={1}>
               <Certificate
                 key={cert.title}
                 title={cert.title}
                 desc={cert.description}
-                buttons={["hello"]}
+                buttons={['hello']}
                 type="Online"
               ></Certificate>
             </Box>
@@ -88,7 +89,7 @@ export default function CV({ certificates, setCertificates }) {
       <Typography className={classes.title} variant="h6" gutterBottom>
         Work Experience
       </Typography>
-      <Box display="flex" flexDirection="row" p={1} m={1}>
+      <Box display="flex" flexDirection="row" flexWrap="wrap" p={1} m={1}>
         <Box p={1}>
           <CertificateSkeleton></CertificateSkeleton>
         </Box>
@@ -99,7 +100,7 @@ export default function CV({ certificates, setCertificates }) {
       <Typography className={classes.title} variant="h6" gutterBottom>
         Formal Education
       </Typography>
-      <Box display="flex" flexDirection="row" p={1} m={1}>
+      <Box display="flex" flexDirection="row" flexWrap="wrap" p={1} m={1}>
         <Box p={1}>
           <CertificateSkeleton></CertificateSkeleton>
         </Box>
@@ -111,7 +112,7 @@ export default function CV({ certificates, setCertificates }) {
       <Typography className={classes.title} variant="h6" gutterBottom>
         Online Course Cerficates
       </Typography>
-      <Box display="flex" flexDirection="row" p={1} m={1}>
+      <Box display="flex" flexDirection="row" flexWrap="wrap" p={1} m={1}>
         <Box p={1}>
           <CertificateSkeleton></CertificateSkeleton>
         </Box>
