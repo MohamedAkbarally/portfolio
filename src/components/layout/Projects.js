@@ -35,9 +35,6 @@ export default function Projects({ projects, setProjects }) {
 
   return projects != null ? (
     <React.Fragment>
-      <Typography style={styles.title} variant="h6" gutterBottom>
-        Programming
-      </Typography>
       <Grid container style={styles.grid} spacing={3}>
         {projects.map((project, index) => {
           return (
@@ -55,9 +52,6 @@ export default function Projects({ projects, setProjects }) {
     </React.Fragment>
   ) : (
     <React.Fragment>
-      <Typography style={styles.title} variant="h6" gutterBottom>
-        Programming
-      </Typography>
       <Grid container style={styles.grid} spacing={3}>
         <ProjectCardSkeleton></ProjectCardSkeleton>
         <ProjectCardSkeleton></ProjectCardSkeleton>

@@ -7,6 +7,7 @@ import AboutMe from "./components/layout/AboutMe";
 import Contact from "./components/layout/Contact";
 import CV from "./components/layout/CV";
 import { makeStyles } from "@material-ui/core/styles";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
 
 import {
   BrowserRouter as Router,
@@ -15,11 +16,17 @@ import {
   Redirect,
 } from "react-router-dom";
 
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: '"Roboto Mono", cursive',
+  },
+});
+
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: 24,
     position: "relative",
-    marginLeft: "279px",
+    marginLeft: "299px",
     [theme.breakpoints.down("xs")]: {
       marginLeft: "0px",
       marginRight: "0px",
@@ -36,51 +43,53 @@ function App() {
   const [certificates, setCertificates] = useState(null);
 
   return (
-    <Router>
-      <div>
-        <NavBar isNav={true} />
-        <div className={classes.root}>
-          <Switch>
-            <Route
-              exact
-              path="/projects"
-              component={() => (
-                <Projects projects={projects} setProjects={setProjects} />
-              )}
-            />
-            <Route
-              exact
-              path="/project/:slug"
-              component={() => (
-                <Project
-                  project={project}
-                  setProject={setProject}
-                  projects={projects}
-                />
-              )}
-            />
+    <MuiThemeProvider theme={theme}>
+      <Router>
+        <div>
+          <NavBar isNav={true} />
+          <div className={classes.root}>
+            <Switch>
+              <Route
+                exact
+                path="/projects"
+                component={() => (
+                  <Projects projects={projects} setProjects={setProjects} />
+                )}
+              />
+              <Route
+                exact
+                path="/project/:slug"
+                component={() => (
+                  <Project
+                    project={project}
+                    setProject={setProject}
+                    projects={projects}
+                  />
+                )}
+              />
 
-            <Route exact path="/contact" component={Contact} />
-            <Route
-              exact
-              path="/cv"
-              component={() => (
-                <CV
-                  certificates={certificates}
-                  setCertificates={setCertificates}
-                />
-              )}
-            />
-            <Route
-              exact
-              path="/about"
-              component={() => <AboutMe about={about} setAbout={setAbout} />}
-            />
-            <Redirect from="/" to="/projects" />
-          </Switch>
+              <Route exact path="/contact" component={Contact} />
+              <Route
+                exact
+                path="/cv"
+                component={() => (
+                  <CV
+                    certificates={certificates}
+                    setCertificates={setCertificates}
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/about"
+                component={() => <AboutMe about={about} setAbout={setAbout} />}
+              />
+              <Redirect from="/" to="/projects" />
+            </Switch>
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </MuiThemeProvider>
   );
 }
 

@@ -7,7 +7,7 @@ import { Button } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import PhoneIcon from "@material-ui/icons/Phone";
+import PhoneIcon from "@material-ui/icons/PhoneTwoTone";
 import Alert from "@material-ui/lab/Alert";
 import Snackbar from "@material-ui/core/Snackbar";
 
@@ -147,6 +147,7 @@ export default function AboutMe() {
             <Button
               type="submit"
               color="primary"
+              style={{ backgroundColor: "#6c6c6c" }}
               disableElevation
               variant="contained"
             >

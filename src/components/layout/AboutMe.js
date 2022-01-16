@@ -11,7 +11,7 @@ const styles = {
     marginTop: 8,
     marginBottom: 8,
 
-    maxWidth: "600pt",
+    maxWidth: "700pt",
   },
   card: {
     marginTop: "0px",

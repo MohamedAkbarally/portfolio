@@ -1,6 +1,7 @@
 import React from "react";
 import Chip from "@material-ui/core/Chip";
 import Icon from "@material-ui/core/Icon";
+import { Typography, Box } from "@material-ui/core";
 
 export default function Chips(props) {
   var name = props.icon;
@@ -8,27 +9,31 @@ export default function Chips(props) {
 
   return (
     <div style={{ display: "inline-block" }}>
-      <div
+      <Box
+        p={0.5}
         style={{
-          backgroundColor: "#ccc",
-          borderRadius: 4,
-          fontSize: "1.1em",
-          display: "flex",
-          alignItems: "center",
-          flexWrap: "wrap",
-          padding: 4,
-          paddingRight: 12,
+          backgroundColor: "lightgrey",
           marginRight: 8,
-          marginBottom: 8,
-          marginTop: 8,
-          paddingLeft: 8,
-          justifyContent: "center",
+          paddingLeft: 16,
+          paddingRight: 16,
+          borderRadius: 15,
         }}
+        display="flex"
+        alignItems="center"
       >
-        <i style={{ marginRight: 4 }} className={`devicon-${props.icon}`}></i>
+        <Box>
+          <i
+            style={{ marginRight: 12 }}
+            className={`devicon-${props.icon}`}
+          ></i>
+        </Box>
 
-        {props.name ? props.name : name}
-      </div>
+        <Box>
+          <Typography variant="body1">
+            {props.name ? props.name : name}
+          </Typography>
+        </Box>
+      </Box>
     </div>
   );
 }

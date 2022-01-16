@@ -55,13 +55,10 @@ export default function ProjectCard({
   var url_full = Image.length != 0 ? Image[0].url : "";
   return (
     <React.Fragment>
-      <Grid item xs={12} sm={12} md={6} lg={4} xl={3}>
+      <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
         <Link className="text-link" to={"/project/" + slug}>
           <Card className={classes.card} elevation={0} variant="outlined">
             <CardActionArea>
-              <div className={classes.imageBG} style={{ background: color }}>
-                <img src={image} alt={title} width="130px"></img>
-              </div>
               <div className={classes.CardContent}>
                 <Typography
                   align="left"
@@ -76,7 +73,7 @@ export default function ProjectCard({
                   component="p"
                   className={classes.subText}
                 >
-                  <Ellipsis text={description} lines={3} suffix="..." />
+                  <Ellipsis text={description} lines={4} suffix="..." />
                 </Typography>
               </div>
             </CardActionArea>

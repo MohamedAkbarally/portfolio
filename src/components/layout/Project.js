@@ -98,7 +98,7 @@ export default function Project(props) {
       <div className={classes.toolbar}>
         <AppBar
           elevation={0}
-          style={{ backgroundColor: color, position: "sticky" }}
+          style={{ position: "sticky", backgroundColor: "#6c6c6c" }}
         >
           <Toolbar>
             <Link to="/projects">
@@ -117,7 +117,14 @@ export default function Project(props) {
           </Toolbar>
         </AppBar>
       </div>
-      <div style={{ marginRight: -24, marginLeft: -24, marginBottom: -24 }}>
+      <div
+        style={{
+          marginRight: -24,
+          marginLeft: -24,
+          marginBottom: -24,
+          overflowX: "hidden",
+        }}
+      >
         {project == null || project[0].slug.current != slug ? (
           loading
         ) : (

@@ -6,23 +6,22 @@ import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import GitHubIcon from "@material-ui/icons/GitHub";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import MailIcon from "@material-ui/icons/Mail";
-import FolderIcon from "@material-ui/icons/Folder";
+import MailIcon from "@material-ui/icons/EmailTwoTone";
+import FolderIcon from "@material-ui/icons/AccountTreeTwoTone";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import ProfilePicture from "../../images/ProfilePicture.png";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import { withRouter } from "react-router-dom";
-import AssignmentIcon from "@material-ui/icons/Assignment";
 import { useLocation } from "react-router-dom";
-
-const drawerWidth = 280;
+import { GitIcon } from "../../images/giticon.svg";
+const drawerWidth = 300;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -72,28 +71,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const icons = [
-  <AccountCircleIcon />,
-  <FolderIcon />,
-  <AssignmentIcon />,
-  <MailIcon />,
-];
+const icons = [<FolderIcon />, <MailIcon />];
 
-var selectedItem = [0, 1, 0, 0];
+var selectedItem = [1, 0];
 
 function NavBar(props) {
   const { pathname } = props.location;
 
-  if (pathname === "/about") {
-    selectedItem = [1, 0, 0, 0];
-  }
-
   if (pathname === "/contact") {
-    selectedItem = [0, 0, 0, 1];
-  }
-
-  if (pathname === "/cv") {
-    selectedItem = [0, 0, 1, 0];
+    selectedItem = [0, 1];
   }
   const { container } = props;
   const classes = useStyles();
@@ -109,28 +95,18 @@ function NavBar(props) {
   };
 
   const handleClick = (i, e) => {
-    selectedItem = [0, 0, 0, 0];
+    selectedItem = [0, 0];
     if (selectedItem[i] === 1) {
       handleDrawerClose();
       return;
     }
     selectedItem[i] = 1;
     if (i === 0) {
-      props.history.push("/about");
-      handleDrawerClose();
-      return;
-    }
-    if (i === 1) {
       props.history.push("/projects");
       handleDrawerClose();
       return;
     }
-    if (i === 2) {
-      props.history.push("/cv");
-      handleDrawerClose();
-      return;
-    }
-    if (i === 3) {
+    if (i === 1) {
       props.history.push("/contact");
       handleDrawerClose();
       return;
@@ -165,6 +141,7 @@ function NavBar(props) {
         <img
           src={ProfilePicture}
           width="180px"
+          style={{ borderRadius: 8 }}
           className={classes.image}
           alt="Profile"
         />
@@ -175,7 +152,7 @@ function NavBar(props) {
       <br />
       <Divider />
       <List>
-        {["About Me", "Projects", "CV", "Contact"].map((text, index) => (
+        {["Projects", "Contact"].map((text, index) => (
           <div key={index}>
             <ListItem
               button
@@ -188,6 +165,19 @@ function NavBar(props) {
             </ListItem>
           </div>
         ))}
+        <ListItem
+          button
+          key={"Github"}
+          onClick={(e) => {
+            e.preventDefault();
+            window.open("https://github.com/MohamedAkbarally", "_blank");
+          }}
+        >
+          <ListItemIcon>
+            <GitHubIcon />
+          </ListItemIcon>
+          <ListItemText primary={"Github"} />
+        </ListItem>
       </List>
     </div>
   );

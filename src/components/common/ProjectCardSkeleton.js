@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "10px",
     paddingRight: "15px",
     paddingLeft: "15px",
-    height: 140,
+    height: 130,
   },
   mainText: {
     fontWeight: 600,
@@ -42,9 +42,8 @@ export default function ProjectCard(props) {
 
   return (
     <React.Fragment>
-      <Grid item xs={12} sm={12} md={6} lg={4} xl={3}>
+      <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
         <Paper className={classes.card} elevation={0} variant="outlined">
-          <Skeleton animation="wave" variant="rect" height={130} />
           <div className={classes.CardContent}>
             <Typography align="left" variant="h6" className={classes.mainText}>
               <Skeleton animation="wave" />
