@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "10px",
     paddingRight: "15px",
     paddingLeft: "15px",
-    minHeight: 130,
+    minHeight: 160,
   },
   mainText: {
     fontWeight: 600,
@@ -55,7 +55,7 @@ export default function ProjectCard({
   var url_full = Image.length != 0 ? Image[0].url : "";
   return (
     <React.Fragment>
-      <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
+      <Grid item xs={12} sm={12} md={12} lg={6} xl={4}>
         <Link className="text-link" to={"/project/" + slug}>
           <Card className={classes.card} elevation={0} variant="outlined">
             <CardActionArea>

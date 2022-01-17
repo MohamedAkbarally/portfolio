@@ -141,7 +141,7 @@ function NavBar(props) {
         <img
           src={ProfilePicture}
           width="180px"
-          style={{ borderRadius: 8 }}
+          style={{ borderRadius: 8, border: "4px solid #EBEBEB" }}
           className={classes.image}
           alt="Profile"
         />
